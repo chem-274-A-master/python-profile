@@ -1,25 +1,37 @@
-# Chem 274A - Lab 1
+# Chem 274A - Python Profiling
 
-In this lab, you will be using the molecular simulation code we wrote in Chem 280 - Foundations of Molecular Modelling and Software Engineering.
+In this lab, you will be using the molecular simulation code we wrote in Chem 280 - Foundations of Molecular Modelling and Software Engineering and profiling it using `cProfile`.
 
-## Exercises
+You can also use a program called `snakeviz` to visualize the profiling.
 
-### Section 1 - Makefile (Spend 30 minutes max on this)
-1. Use the `makefile` to create an environment for this lab.
-    ```
-    cd mcsim_python
-    make environment
-    ```
-2. Activate the environment created by the `makefile`
-    ```
-    conda activate chem274A_lab1
-    ```
-3. Use the `makefile` to install `mcsim`
-    ```
-    make install
-    ```
+## Installation
 
-4. Review the Makefile in `mcsim_python`. Write a comment above each target explaining what the target does.
+Create an environment with the needed packages by doing
 
-### Section 2 - Runnning Simulations
-1. Use the notebook `run_mcsim.ipynb` to run Monte Carlo simulations. Follow the instructions in the notebook.
+```
+make environment
+conda activate pyprofile
+make dev-install
+```
+
+## Profiling Code
+
+This repo contains a script which runs the NumPy version of the Monte Carlo code and the Python Standard Library version of the Monte Carlo code.
+
+Use [cProfile](https://docs.python.org/3/library/profile.html) to profile the code. For example, to profile the NumPy version of the code.
+
+```bash
+python -m cProfile mcsim_numpy.py -o numpy.prof
+```
+
+You can then view the profiling results using
+
+```
+snakeviz numpy.prof
+```
+
+Complete this for both the NumPy and Python Standard Library version of your code. If you completed Chem 280, consider profiling your team's code as well.
+
+Use insight obtained from profiling to try to speed up your code. Note that this optimization should not impact the obtained results. 
+
+
